@@ -20,13 +20,22 @@ namespace Hangman
                 "GIRAFFE"
             };
             // Select a random pet from the listPet
-            int randPetListIndex = rand.Next(petList.Count);
+            // int randPetListIndex = rand.Next(petList.Count);
+            // int randIndexPetList = rand.Next(petList.Count);
+            // string randPet = randIndexPetList.ToString();
+            
+            // Take random pet as a string from a string list
+            string randomPetFromPetList = petList[rand.Next(petList.Count)];
+
+
 
             // Ask the user to fill in a character
             Console.WriteLine("Insert a character: ");
             char inputLetter = Console.ReadLine()[0];
             string inputLetterToStr = inputLetter.ToString();
             string inputUpperCaseLetter = inputLetterToStr.ToUpper();
+
+
 
             /*
             bool found = false;
