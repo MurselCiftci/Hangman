@@ -40,8 +40,8 @@ namespace Hangman
 
 
             
-            bool found = false;
             
+            // creates underscores for each letter of the random pet
             List<char> hangmanSecretLetterUnderscores = new List<char>();
             char underscore = '_';
             
@@ -52,19 +52,17 @@ namespace Hangman
             
             Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
 
-            /*
-            foreach (char letter in hangmanSecretLetterUnderscores)
-            {
-                Console.WriteLine(letter);
-            }
-            */
             
             
+            
+            // bool found = false;
             for (int i = 0; i < randomPetFromPetList.Length;i++)
             {
                 if (inputLetter == petLetters[i])
                 {
-                    found = true;
+                    hangmanSecretLetterUnderscores.RemoveAt(i);
+                    hangmanSecretLetterUnderscores.Insert(i, inputLetter);
+                    // found = true;
                 }
 
             }
