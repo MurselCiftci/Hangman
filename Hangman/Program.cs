@@ -19,29 +19,15 @@ namespace Hangman
                 "SNAKE",
                 "GIRAFFE"
             };
-            /* Select a random pet from the listPet
-            // int randPetListIndex = rand.Next(petList.Count);
-            // int randIndexPetList = rand.Next(petList.Count);
-             string randPet = randIndexPetList.ToString();*/
-
-
-
+ 
             // Take random pet as a string from a string list
             string randomPetFromPetList = petList[rand.Next(petList.Count)];
             
+            // Split the random pet word into characters of each letter
             List<char> petLetters = new List<char>();
             petLetters.AddRange(randomPetFromPetList);
 
-            // Ask the user to fill in a character
-            Console.WriteLine("Insert a character: ");
-            char inputLetter = Console.ReadLine()[0];
-          //  string inputLetterToStrUpperCase = inputLetter.ToString().ToUpper();
-
-
-
-            
-            
-            // creates underscores for each letter of the random pet
+            // Creates a list of underscores for each letter of the random pet
             List<char> hangmanSecretLetterUnderscores = new List<char>();
             char underscore = '_';
             
@@ -50,12 +36,14 @@ namespace Hangman
                 hangmanSecretLetterUnderscores.Add(underscore);
             }
             
-            Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
+            // Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
+            
+            // Ask the user to fill in a character
+            Console.WriteLine("Insert a character: ");
+            char inputLetter = Console.ReadLine()[0];
 
-            
-            
-            
             // bool found = false;
+            // Checks whether inputletter matches a letter from random pet, if so it replaces underscore in right position for letter
             for (int i = 0; i < randomPetFromPetList.Length;i++)
             {
                 if (inputLetter == petLetters[i])
