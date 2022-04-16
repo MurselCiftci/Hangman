@@ -25,6 +25,15 @@ namespace Hangman
             while (gameRunning == true)
             {
                 // In section below initialize a new game
+
+                // keep track of amount of guesses
+                int guesses = 0;
+
+                // Keep track of max guesses 
+                int maxGuesses = 3;
+
+                bool found = false;
+
                 // Take random pet as a string from a string list
                 string randomPetFromPetList = petList[rand.Next(petList.Count)];
 
@@ -41,17 +50,32 @@ namespace Hangman
                     hangmanSecretLetterUnderscores.Add(underscore);
                 }
 
+                Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
+
                 while (true)
                 {
-                    // Ask the user to fill in a character
-                    Console.WriteLine("Insert a character: ");
-                    char inputLetter = Console.ReadLine()[0];
-                    Console.Clear();
+                    if (guesses >= maxGuesses)
+                    {
+                        break;
+                    }
 
-                    // bool found = false;
+
+
+                    // Ask the user to fill in a character
+                    Console.WriteLine("\nInsert a character: ");
+                    char inputLetter = Console.ReadLine()[0];
+
+                    // Every time the user goes through this loop a guess amount is added
+                    guesses++;
+
+
+
                     // Checks whether inputletter matches a letter from random pet, if so it replaces underscore in right position for letter
                     for (int i = 0; i < randomPetFromPetList.Length; i++)
                     {
+                        found = false;
+
+
                         if (inputLetter == petLetters[i])
                         {
                             Console.Clear();
@@ -59,14 +83,17 @@ namespace Hangman
                             hangmanSecretLetterUnderscores.RemoveAt(i);
                             hangmanSecretLetterUnderscores.Insert(i, inputLetter);
                             Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
-                            // found = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{inputLetter} does not exist in the secret word");
+                            found = true;
                         }
                     }
-                    break;
+                    
+                    if (!found)
+                    {
+                        Console.Clear();
+                        Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
+                        Console.WriteLine("\nYou guessed wrong!");
+                    }
+
                 }
                 break;
             }
