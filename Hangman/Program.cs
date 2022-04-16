@@ -41,6 +41,7 @@ namespace Hangman
             // Ask the user to fill in a character
             Console.WriteLine("Insert a character: ");
             char inputLetter = Console.ReadLine()[0];
+            Console.Clear();
 
             // bool found = false;
             // Checks whether inputletter matches a letter from random pet, if so it replaces underscore in right position for letter
@@ -48,8 +49,11 @@ namespace Hangman
             {
                 if (inputLetter == petLetters[i])
                 {
+                    Console.Clear();
+                    Console.WriteLine($"Good job! The letter {inputLetter} is in the secret word!");
                     hangmanSecretLetterUnderscores.RemoveAt(i);
                     hangmanSecretLetterUnderscores.Insert(i, inputLetter);
+                    Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
                     // found = true;
                 }
 
