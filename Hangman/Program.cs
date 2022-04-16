@@ -19,38 +19,68 @@ namespace Hangman
                 "SNAKE",
                 "GIRAFFE"
             };
-            // Select a random pet from the listPet
+            /* Select a random pet from the listPet
             // int randPetListIndex = rand.Next(petList.Count);
             // int randIndexPetList = rand.Next(petList.Count);
-            // string randPet = randIndexPetList.ToString();
-            
+             string randPet = randIndexPetList.ToString();*/
+
+
+
             // Take random pet as a string from a string list
             string randomPetFromPetList = petList[rand.Next(petList.Count)];
-
-
+            
+            List<char> petLetters = new List<char>();
+            petLetters.AddRange(randomPetFromPetList);
 
             // Ask the user to fill in a character
             Console.WriteLine("Insert a character: ");
             char inputLetter = Console.ReadLine()[0];
-            string inputLetterToStr = inputLetter.ToString();
-            string inputUpperCaseLetter = inputLetterToStr.ToUpper();
+          //  string inputLetterToStrUpperCase = inputLetter.ToString().ToUpper();
 
 
+
+            
+            bool found = false;
+            
+            List<char> hangmanSecretLetterUnderscores = new List<char>();
+            char underscore = '_';
+            
+            for (int i = 0; i < petLetters.Count; i++)
+            {
+                hangmanSecretLetterUnderscores.Add(underscore);
+            }
+            
+            Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
 
             /*
-            bool found = false;
-            for (int i = 0; i < randomPetSeparateLetters.Length; i++)
+            foreach (char letter in hangmanSecretLetterUnderscores)
             {
-                if (inputUpperCaseLetter == randomPetSeparateLettersToStr)
-                {
-
-                    found = true;
-                }
+                Console.WriteLine(letter);
             }
             */
             
+            
+            for (int i = 0; i < randomPetFromPetList.Length;i++)
+            {
+                if (inputLetter == petLetters[i])
+                {
+                    found = true;
+                }
 
-           
+            }
+
+            //if (inputLetter == petLetters[0])
+            //    found = true;
+
+            //if (inputLetter == petLetters[1])
+            //    found = true;
+
+            //if (inputLetter == petLetters[2])
+            //    found = true;
+
+
+
+
 
         }
     }
