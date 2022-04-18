@@ -32,8 +32,6 @@ namespace Hangman
                 // keep track of amount of guesses
                 int guesses = 0;
 
-                // bool found = false;
-
                 // Take random pet as a string from a string list
                 string randomPetFromPetList = petList[rand.Next(petList.Count)];
 
@@ -51,10 +49,7 @@ namespace Hangman
                 }
 
                 Console.WriteLine(string.Join(" ", currentGameWord));
-                
-
-                
-
+          
                 while (true)
                 {
                     if (guesses >= MAX_GUESSES)
@@ -93,8 +88,7 @@ namespace Hangman
                         Console.WriteLine("\nYou guessed wrong!");
                     }
 
-                    //TODO: Break loop in WIN ;)
-
+                    // Win logic
                     string liveCurrentWord = string.Join(" ", currentGameWord);
                     string petLettersSeparated = string.Join(" ", petLetters);
 
