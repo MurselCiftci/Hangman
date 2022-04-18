@@ -50,10 +50,10 @@ namespace Hangman
                     currentGameWord.Add(underscore);
                 }
 
-                // Console.WriteLine(string.Join(" ", currentGameWord));
-                string liveCurrentWord = string.Join("", currentGameWord);
+                Console.WriteLine(string.Join(" ", currentGameWord));
+                
 
-                Console.WriteLine(liveCurrentWord);
+                
 
                 while (true)
                 {
@@ -80,7 +80,7 @@ namespace Hangman
                             Console.Clear();
                             currentGameWord.RemoveAt(i);
                             currentGameWord.Insert(i, inputLetter);
-                            Console.WriteLine(liveCurrentWord);
+                            Console.WriteLine(string.Join(" ", currentGameWord));
                             Console.WriteLine($"\nGood job! The letter {inputLetter} is in the secret word!");
                             found = true;
                         }
@@ -89,12 +89,20 @@ namespace Hangman
                     if (found == false)
                     {
                         Console.Clear();
-                        Console.WriteLine(liveCurrentWord);
+                        Console.WriteLine(string.Join(" ", currentGameWord));
                         Console.WriteLine("\nYou guessed wrong!");
                     }
 
                     //TODO: Break loop in WIN ;)
 
+                    string liveCurrentWord = string.Join(" ", currentGameWord);
+                    string petLettersSeparated = string.Join(" ", petLetters);
+
+                    if (liveCurrentWord == petLettersSeparated)
+                    {
+                        Console.WriteLine("You won!");
+                        break;
+                    }
                 }
                 break;
             }
