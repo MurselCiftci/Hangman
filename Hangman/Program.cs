@@ -8,6 +8,9 @@ namespace Hangman
     {
         static void Main(string[] args)
         {
+            // number of  max guesses allowed 
+            int MAX_GUESSES = 10;
+
             // Initialize randomizer 
             Random rand = new Random();
 
@@ -29,10 +32,7 @@ namespace Hangman
                 // keep track of amount of guesses
                 int guesses = 0;
 
-                // Keep track of max guesses 
-                int maxGuesses = 3;
-
-                bool found = false;
+                // bool found = false;
 
                 // Take random pet as a string from a string list
                 string randomPetFromPetList = petList[rand.Next(petList.Count)];
@@ -42,24 +42,26 @@ namespace Hangman
                 petLetters.AddRange(randomPetFromPetList);
 
                 // Creates a list of underscores for each letter of the random pet
-                List<char> hangmanSecretLetterUnderscores = new List<char>();
+                List<char> currentGameWord = new List<char>();
                 char underscore = '_';
 
                 for (int i = 0; i < petLetters.Count; i++)
                 {
-                    hangmanSecretLetterUnderscores.Add(underscore);
+                    currentGameWord.Add(underscore);
                 }
 
-                Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
+                // Console.WriteLine(string.Join(" ", currentGameWord));
+                string liveCurrentWord = string.Join("", currentGameWord);
+
+                Console.WriteLine(liveCurrentWord);
 
                 while (true)
                 {
-                    if (guesses >= maxGuesses)
+                    if (guesses >= MAX_GUESSES)
                     {
+                        Console.WriteLine("Game over, you are out of guesses");
                         break;
                     }
-
-
 
                     // Ask the user to fill in a character
                     Console.WriteLine("\nInsert a character: ");
@@ -68,31 +70,30 @@ namespace Hangman
                     // Every time the user goes through this loop a guess amount is added
                     guesses++;
 
-
+                    bool found = false;
 
                     // Checks whether inputletter matches a letter from random pet, if so it replaces underscore in right position for letter
                     for (int i = 0; i < randomPetFromPetList.Length; i++)
                     {
-                        found = false;
-
-
                         if (inputLetter == petLetters[i])
                         {
                             Console.Clear();
-                            Console.WriteLine($"Good job! The letter {inputLetter} is in the secret word!");
-                            hangmanSecretLetterUnderscores.RemoveAt(i);
-                            hangmanSecretLetterUnderscores.Insert(i, inputLetter);
-                            Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
+                            currentGameWord.RemoveAt(i);
+                            currentGameWord.Insert(i, inputLetter);
+                            Console.WriteLine(liveCurrentWord);
+                            Console.WriteLine($"\nGood job! The letter {inputLetter} is in the secret word!");
                             found = true;
                         }
                     }
-                    
-                    if (!found)
+
+                    if (found == false)
                     {
                         Console.Clear();
-                        Console.WriteLine(string.Join(" ", hangmanSecretLetterUnderscores));
+                        Console.WriteLine(liveCurrentWord);
                         Console.WriteLine("\nYou guessed wrong!");
                     }
+
+                    //TODO: Break loop in WIN ;)
 
                 }
                 break;
